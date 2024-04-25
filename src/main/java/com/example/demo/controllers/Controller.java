@@ -1,27 +1,28 @@
 package com.example.demo.controllers;
 
 import com.example.demo.api.Api;
-import com.example.demo.model.Goods;
 import com.example.demo.model.Product;
-import jakarta.annotation.PostConstruct;
+import com.example.demo.model.User;
+import com.example.demo.repository.ProductRepo;
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 public class Controller {
-    private final List<Product> products = new ArrayList<Product>();
-    private final ArrayList<Goods> goods = new ArrayList<Goods>();
 
-    @PostConstruct
-    public void init() {
-        products.add(new Product(1, "Apple", 100, 42));
-        products.add(new Product(2, "Banana", 50, 30));
-        goods.add(new Goods(goods.toArray().length, "Apple", "Green"));
-        goods.add(new Goods(goods.toArray().length, "Juice", "Red"));
+    private final UserRepository userRepository;
+    private final ProductRepo productRepository;
+
+    @Autowired
+    public Controller(UserRepository userRepository, ProductRepo productRepository) {
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("/api")
@@ -31,17 +32,19 @@ public class Controller {
 
     @GetMapping("/")
     public String index() {
-        System.out.println("Hello");
         return "Hello World";
     }
 
-    @GetMapping("/products")
-    public List<Product> products() {
-        return products;
+    @GetMapping("/test{id}")
+    public User test(@PathVariable int id) {
+        Optional<User> users = userRepository.findById(id);
+        return users.orElse(null);
     }
 
-    @GetMapping("/goods")
-    public ArrayList<Goods> goods() {
-        return goods;
+    @GetMapping("/product{id}")
+    public Product product(@PathVariable int id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.orElse(null);
     }
+
 }

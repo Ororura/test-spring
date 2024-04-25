@@ -9,12 +9,10 @@ public class DB {
     public static Connection connect() throws SQLException {
 
         try {
-            // Get database credentials from DatabaseConfig class
-            var jdbcUrl = DataBaseConfig.getDbUrl();
-            var user = DataBaseConfig.getDbUsername();
-            var password = DataBaseConfig.getDbPassword();
+            String jdbcUrl = DataBaseConfig.getDbUrl();
+            String user = DataBaseConfig.getDbUsername();
+            String password = DataBaseConfig.getDbPassword();
 
-            // Open a connection
             return DriverManager.getConnection(jdbcUrl, user, password);
 
         } catch (SQLException  e) {
