@@ -7,4 +7,7 @@ import java.util.Optional;
 
 public interface UserRepository extends Repository<User, Long> {
     Optional<User> findById(int id);
+
+    void save(User user);
 }
+
