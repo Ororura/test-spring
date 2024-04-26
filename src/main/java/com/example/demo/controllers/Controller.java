@@ -12,6 +12,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class Controller {
 
     private final UserRepository userRepository;
@@ -27,6 +28,12 @@ public class Controller {
     public String index() {
         return "Hello World";
     }
+
+    @GetMapping("/user")
+    public List<Account> accounts() {
+      return userRepository.findAll();
+    } 
+    
 
     @GetMapping("/user/{id}")
     public Account account(@PathVariable Long id) {
