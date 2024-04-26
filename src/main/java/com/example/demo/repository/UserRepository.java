@@ -1,13 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.User;
-import org.springframework.data.repository.Repository;
+import com.example.demo.entities.Account;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.Optional;
-
-public interface UserRepository extends Repository<User, Long> {
-    Optional<User> findById(int id);
-
-    void save(User user);
+public interface UserRepository extends CrudRepository<Account, Long> {
 }
 
