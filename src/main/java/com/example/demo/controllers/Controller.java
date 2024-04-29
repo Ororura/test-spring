@@ -4,6 +4,7 @@ import com.example.demo.entities.Account;
 import com.example.demo.entities.Product;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.CheckTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,14 @@ public class Controller {
     private final UserRepository userRepository;
     private final ProductRepo productRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CheckTime checkTime;
 
     @Autowired
-    public Controller(UserRepository userRepository, ProductRepo productRepository, PasswordEncoder passwordEncoder) {
+    public Controller(UserRepository userRepository, ProductRepo productRepository, PasswordEncoder passwordEncoder, CheckTime checkTime) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.passwordEncoder = passwordEncoder;
+        this.checkTime = checkTime;
     }
 
     @GetMapping("/")
@@ -42,6 +45,11 @@ public class Controller {
     public Account account(@PathVariable Long id) {
         Optional<Account> users = userRepository.findById(id);
         return users.orElse(null);
+    }
+
+    @GetMapping("/checktime/{string}")
+    public boolean checkTime(@PathVariable String string) {
+        return checkTime.isDay(string);
     }
 
     @GetMapping("/product/{id}")
