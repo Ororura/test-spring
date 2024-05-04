@@ -1,11 +1,15 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Account;
+import com.example.demo.entities.Message;
 import com.example.demo.entities.Product;
+import com.example.demo.repository.MessageRepo;
 import com.example.demo.repository.ProductRepo;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.CheckTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,11 +39,22 @@ public class Controller {
         return "Hello World";
     }
 
+    @MessageMapping("/chat")
+    @SendTo("/topic/chat")
+    public List<Message> messages(Message message) {
+        this.messageRepo.save(message);
+        return messageRepo.findAll();
+    }
+
     @GetMapping("/user")
     public List<Account> accounts() {
         return userRepository.findAll();
     }
 
+    @GetMapping("/chat")
+    public List<Message> getChat() {
+        return messageRepo.findAll();
+    }
 
     @GetMapping("/user/{id}")
     public Account account(@PathVariable Long id) {
