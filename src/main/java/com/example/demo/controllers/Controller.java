@@ -25,13 +25,15 @@ public class Controller {
     private final ProductRepo productRepository;
     private final PasswordEncoder passwordEncoder;
     private final CheckTime checkTime;
+    private final MessageRepo messageRepo;
 
     @Autowired
-    public Controller(UserRepository userRepository, ProductRepo productRepository, PasswordEncoder passwordEncoder, CheckTime checkTime) {
+    public Controller(UserRepository userRepository, ProductRepo productRepository, PasswordEncoder passwordEncoder, CheckTime checkTime, MessageRepo messageRepo) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.passwordEncoder = passwordEncoder;
         this.checkTime = checkTime;
+        this.messageRepo = messageRepo;
     }
 
     @GetMapping("/")
