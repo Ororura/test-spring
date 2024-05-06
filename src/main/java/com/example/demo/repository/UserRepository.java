@@ -1,9 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.entities.Account;
-import org.springframework.data.repository.CrudRepository;
+import com.example.demo.entities.user.User;
 import org.springframework.data.repository.ListCrudRepository;
 
-public interface UserRepository extends ListCrudRepository<Account, Long> {
+public interface UserRepository extends ListCrudRepository<User, Long> {
 }
 

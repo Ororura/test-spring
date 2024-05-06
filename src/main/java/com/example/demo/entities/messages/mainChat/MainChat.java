@@ -1,11 +1,13 @@
-package com.example.demo.entities;
+package com.example.demo.entities.messages.mainChat;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.Instant;
+
 @Entity
-@Table(name = "messages")
-public class Message {
+@Table(name = "main_chat")
+public class MainChat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('messages_id_seq'")
@@ -17,6 +19,17 @@ public class Message {
 
     @Column(name = "text", length = Integer.MAX_VALUE)
     private String text;
+
+    @Column(name = "\"timestamp\"", nullable = false)
+    private Instant timestamp;
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Integer getId() {
         return id;
