@@ -22,14 +22,14 @@ public class UsersChatController {
 
     @GetMapping("/users-chat")
     public List<UsersMessages> personalChat() {
-        return this.usersMessagesRepo.findByReceiverIdOrderBySentAtDesc(1);
+        return this.usersMessagesRepo.findBySenderIdOrReceiverIdOrderBySentAtDesc(1, 2);
     }
 
     @MessageMapping("personal-chat")
     @SendTo("/topic/personal-chat")
     public List<UsersMessages> sendMessage(UsersMessages usersMessages) {
         usersMessagesRepo.save(usersMessages);
-        return this.usersMessagesRepo.findByReceiverIdOrderBySentAtDesc(usersMessages.getReceiver().getId());
+        return this.usersMessagesRepo.findBySenderIdOrReceiverIdOrderBySentAtDesc(usersMessages.getReceiver().getId(), usersMessages.getSender().getId());
     }
 
 }

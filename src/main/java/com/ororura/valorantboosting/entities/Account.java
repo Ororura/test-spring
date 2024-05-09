@@ -19,9 +19,6 @@ public class Account {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "middle_name")
-    private String middleName;
-
     @Column(name = "password")
     private String password;
 
@@ -55,14 +52,6 @@ public class Account {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getPassword() {

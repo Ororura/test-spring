@@ -1,6 +1,6 @@
 package com.ororura.valorantboosting.controllers;
 
-import com.ororura.valorantboosting.entities.User;
+import com.ororura.valorantboosting.entities.Account;
 import com.ororura.valorantboosting.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +20,7 @@ public class CreateUserController {
     }
 
     @PostMapping("/create-user")
-    public void createUser(@RequestBody User user) {
+    public void createUser(@RequestBody Account user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

@@ -1,8 +1,8 @@
 package com.ororura.valorantboosting.repository;
 
-import com.ororura.valorantboosting.entities.User;
-import org.springframework.data.repository.ListCrudRepository;
+import com.ororura.valorantboosting.entities.Account;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends ListCrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<Account, Long> {
 }
 
