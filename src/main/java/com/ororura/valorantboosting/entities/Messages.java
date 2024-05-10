@@ -2,11 +2,11 @@ package com.ororura.valorantboosting.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
-@Table(name = "users_messages")
-public class UsersMessages {
+@Table(name = "messages")
+public class Messages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,12 +16,11 @@ public class UsersMessages {
     @JoinColumn(name = "sender_id")
     private Account sender;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    private Account receiver;
-
+    @Column(name = "content", nullable = false)
     private String content;
-    private LocalDateTime sentAt;
+
+    @Column(name = "time", nullable = false)
+    private Instant sentAt;
 
     public Long getId() {
         return id;
@@ -39,14 +38,6 @@ public class UsersMessages {
         this.sender = sender;
     }
 
-    public Account getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(Account receiver) {
-        this.receiver = receiver;
-    }
-
     public String getContent() {
         return content;
     }
@@ -55,11 +46,11 @@ public class UsersMessages {
         this.content = content;
     }
 
-    public LocalDateTime getSentAt() {
+    public Instant getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(LocalDateTime sentAt) {
+    public void setSentAt(Instant sentAt) {
         this.sentAt = sentAt;
     }
 }

@@ -1,7 +1,7 @@
 package com.ororura.valorantboosting.repository;
 
-import com.ororura.valorantboosting.entities.UsersMessages;
+import com.ororura.valorantboosting.entities.Messages;
 import org.springframework.data.repository.ListCrudRepository;
 
-public interface ChatMessageRepo extends ListCrudRepository<UsersMessages, Long> {
+public interface ChatMessageRepo extends ListCrudRepository<Messages, Long> {
 }
