@@ -32,9 +32,9 @@ public class UsersChatController {
 //
 //    }
 
-    @MessageMapping("/personal-chat")
-    @SendTo("/topic/personal-chat")
-    public List<Messages> personalChat(@Payload Messages messages) {
-
-    }
+//    @MessageMapping("/personal-chat")
+//    @SendTo("/topic/personal-chat")
+//    public List<Messages> personalChat(@Payload Messages messages) {
+//
+//    }
 }
