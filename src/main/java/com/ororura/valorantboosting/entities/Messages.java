@@ -2,7 +2,7 @@ package com.ororura.valorantboosting.entities;
 
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "messages")
@@ -14,13 +14,33 @@ public class Messages {
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
-    private Account sender;
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
+    private User recipient;
 
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "time", nullable = false)
-    private Instant sentAt;
+    @Column(nullable = false)
+    private Date timestamp;
+
+    public User getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Long getId() {
         return id;
@@ -30,11 +50,11 @@ public class Messages {
         this.id = id;
     }
 
-    public Account getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public void setSender(Account sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 
@@ -46,11 +66,4 @@ public class Messages {
         this.content = content;
     }
 
-    public Instant getSentAt() {
-        return sentAt;
-    }
-
-    public void setSentAt(Instant sentAt) {
-        this.sentAt = sentAt;
-    }
 }

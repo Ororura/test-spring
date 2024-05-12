@@ -1,29 +1,26 @@
 package com.ororura.valorantboosting.controllers;
 
 import com.ororura.valorantboosting.entities.Messages;
-import com.ororura.valorantboosting.repository.UsersMessagesRepo;
+import com.ororura.valorantboosting.repository.ChatRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class UsersChatController {
+public class ChatController {
 
-    private final UsersMessagesRepo usersMessagesRepo;
+    private final ChatRepo chatRepo;
 
     @Autowired
-    public UsersChatController(UsersMessagesRepo usersMessagesRepo) {
-        this.usersMessagesRepo = usersMessagesRepo;
+    public ChatController(ChatRepo usersMessagesRepo) {
+        this.chatRepo = usersMessagesRepo;
     }
 
     @GetMapping("/users-chat")
     public List<Messages> personalChat() {
-        return this.usersMessagesRepo.findAll();
+        return this.chatRepo.findMessagesBetweenUsers(2L, 1L);
     }
 
 //    @MessageMapping("personal-chat")
